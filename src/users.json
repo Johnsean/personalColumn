@@ -1,0 +1,42 @@
+// 测试数据
+//  用户列表  // 文章列表
+var users = [{
+  id:"1",
+ //单个文章内显示这些值  [post]组件  personal 对象三个属性：p开头
+  psrc:"column.img",
+  pname:"我的名称",
+  pintro:"我的个人简介",
+
+ ///专栏 column内显示这些值   [personColumn]组件  columninfo 对象三个属性：c开头
+    csrc:"http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f3e41a8b7d9c60b68cdd1ec.jpg?x-oss-process=image/resize,m_pad,h_50,w_50",
+    cname: '铺先生',
+    cintro: '酒店售货机，酒店经营，共享经济，新零售，共享数据线，关注灵趣科技，了解更多'
+    ,
+    articles:[{//文章
+      id:"1111",
+      title:"123",
+      context:"我在学校学语法的时候，最让我头疼的就是各种语法的专有名词，状语，同位语，动名词，动词分词，这些听上去很高大上的称谓到底是什么？这篇文章会分三次推送给，先从什么是状语说起，然后再深入聊聊if的正常语态和虚拟语态句型。 英语中最早学习的复杂句",
+      artImgSrc:"http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5e912f4c7f24af242a382b8c.png?x-oss-process=image/resize,m_fill,h_110,w_200",
+      stamp:"时间戳:2020-11-01 19:00:23"
+      },{
+      id:"2222",
+      title:"abc",
+      artImgSrc:"http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5e912f4c7f24af242a382b8c.png?x-oss-process=image/resize,m_fill,h_110,w_200",
+      context:"def",
+      stamp:"时间戳:2020-11-01 19:00:23"}]},
+    {
+    id:"2",
+    csrc:"http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f3e3a17c305b1070f455202.jpg?x-oss-process=image/resize,m_pad,h_50,w_50",
+    cname:"Vehicle攻城狮",
+    cintro:"半吊子系统和程序狗，沉迷高端理论，日渐消瘦。",
+    },{
+    id:"3",
+    csrc:"http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f3e41a8b7d9c60b68cdd1ec.jpg?x-oss-process=image/resize,m_pad,h_50,w_50",
+    cname:"CATTI和MTI考研考试资料与资讯",
+    cintro:"公号：高斋CATTI，细致讲解让翻译学习更轻松！",
+    },{
+    id:"4",
+    csrc:"http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f3e41b8b7d9c60b68cdd1ef.jpg?x-oss-process=image/resize,m_pad,h_50,w_50",
+    cname:"爱生活爱眼睛",
+    cintro:"愿你有一颗热爱生活的心和一双不老的眼睛！",
+    }];

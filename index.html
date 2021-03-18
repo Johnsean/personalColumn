@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>某某专栏</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <script>
+      // 全局变量：
+      // 利用localStorage 存储键值对User
+      //1. 注册-> users 表中Push
+
+      //2. 登陆- > 从users 表中找到拿出来
+      //把1.2合并 都放入localStorage中 两张表  表1 注册&所有用户信息  表2 当前登陆的用户所有信息 。 登出把表2的值更新到1中并清空2
+
+      //注册成功 把值push 到表1中
+      // a.post b.与表中值对比 只要是登陆成功 就拿出来
+      //判断是否登陆成功状态。 是的话就：
+      var setLocal= {
+        save(key,value){
+          localStorage.setItem(key,JSON.stringify(value))
+        },
+        get(key){
+          return JSON.parse(localStorage.getItem(key))
+        }
+      }
+
+      // //取list
+      const userList = setLocal.get("login")|| null    //存注册的users的所有信息
+      const loginSignItem = setLocal.get("signLogin")|| null //登记登陆状态的表 防止刷新重启网页 初始化后 登陆失效-
+      if(!userList){ //如果没有值 就初始化，有值就不需要
+          let anUsersInfo =[{ //初始本地注册的用户信息& 可以异步验证是否登陆的
+          username:"admin",
+          password:"123456",
+          id:12345,
+          psrc:"column.img",
+          pname:"我的名称",
+          pintro:"我的个人简介",
+
+          ///专栏 column内显示这些值 [personColumn]组件 columninfo 对象三个属性：c开头
+          csrc:"http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f3e41a8b7d9c60b68cdd1ec.jpg?x-oss-process=image/resize,m_pad,h_50,w_50",
+          cname: '上生',
+          cintro: '酒店售货机',
+          articles:[{//文章
+            id:123456,
+            title:"我在学校学",
+            context:"我在学校学语法的时候，最让我头疼的就是各种语法的专有名词，状语，同位语，动名词，动词分词，这些听上去很高大上的称谓到底是什么？这篇文章会分三次推送给，先从什么是状语说起，然后再深入聊聊if的正常语态和虚拟语态句型。",
+            artImgSrc:"http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5e912f4c7f24af242a382b8c.png?x-oss-process=image/resize,m_fill,h_110,w_200",
+            stamp:"2020-11-01 19:00:23"
+            },{
+            id:1234567,
+            title:"abc",
+            artImgSrc:"http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5e912f4c7f24af242a382b8c.png?x-oss-process=image/resize,m_fill,h_110,w_200",
+            context:"def",
+            stamp:"2020-11-01 19:00:23"
+            }]
+          }]
+
+        setLocal.save("login", anUsersInfo)
+      }
+
+
+    </script>
+  </body>
+</html>
