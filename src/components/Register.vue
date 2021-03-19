@@ -1,20 +1,36 @@
 <template>
-  <div>
-    <h3>注册到知乎</h3>
-    <div>
-      <p>用户名</p>
-      <input type="text" placeholder="请输入用户名" v-model.trim="username">
+  <div class="input-card w-330">
+    <h4>注册到简单专栏</h4>
+      <div class="anLabel">
+      <label>邮箱</label>
+      <div class="span-father">
+        <input type="text" placeholder="请输入邮箱" v-model.trim="email" @blur="flag=/^\w+(@+\w+\.c+(om|n))$/.test(email)">
+        <span class="warn" :class="{hidden:email===undefined||flag}">邮箱格式不正确</span>
+      </div>
     </div>
-    <div>
-      <p>密码</p>
-      <input type="text" placeholder="请输入密码" v-model="password" required>
+    <div class="anLabel">
+      <label>用户名</label>
+      <div class="span-father">
+        <input type="text" placeholder="请输入用户名" v-model.trim="username">
+        <span class="warn" :class="{hidden:username===undefined||username!==''}">用户名不能为空</span>
+      </div>
     </div>
-     <div>
-      <p>重复密码</p>
-      <input type="text" placeholder="请再次输入密码" v-model="vpwd">
+    <div class="anLabel">
+      <label>密码</label>
+      <div class="span-father">
+        <input type="password" placeholder="请输入密码" v-model="password">
+        <span class="warn" :class="{hidden:password===undefined||password!==''}">密码不能为空</span>
+      </div>
     </div>
-    <div>
+    <div class="anLabel">
+      <label>重复密码</label>
+      <div class="span-father">
+          <input type="password" placeholder="请再次输入密码" v-model="vpwd">
+          <span class="warn" :class="{hidden:vpwd===''||password===vpwd?1:false}">两次密码输入不一致</span>
+      </div>
       <router-link to="/login">已经有账户？去登陆</router-link>
+    </div>
+    <div>
       <button class="bbtn" @click="register">注册新用户</button>
     </div>
   </div>
@@ -24,9 +40,11 @@
 export default {
   data(){
     return {
-      username:"",
-      password:"",
-      vpwd:""
+      email: undefined,
+      username:undefined,
+      password:undefined,
+      vpwd:"",
+      flag:true
     }
   },
   methods:{

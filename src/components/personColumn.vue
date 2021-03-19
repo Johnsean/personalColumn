@@ -11,10 +11,12 @@
     <div v-if="articles">
       <div class="art-container" v-for="article in articles" :key="article.id" >
         <div class="article borderShadow">
-          <h4><a :href="'/post/'+ article.id" class="black">{{article.title}}</a> </h4>
+          <h4>
+            <router-link :to="'/post/'+ article.id" class="black">{{article.title}}</router-link>
+          </h4>
           <div class="middle">
             <div><img :src="article.artImgSrc" alt=""></div>
-            <p class="gray text-overflows">
+            <p class="gray text-overflows tal">
               {{article.context}}
             </p>
           </div>

@@ -3,13 +3,13 @@
    <!-- 路由切换 -->
    <div class="main">
      <div class="img"><img src="../assets/photo.svg" width="33%"></div>
-     <h2> 随心写作，自由表达 </h2>
+     <h2 class="tac"> 随心写作，自由表达 </h2>
      <div >
         <button class="bbtn" @click="isEdit">开始写文章</button>
      </div>
    <!-- 展示一些专栏 -->
       <div class="footer">
-        <h2>发现精彩</h2>
+        <h2 class="tac">发现精彩</h2>
         <!-- 一排三个 循环组件 -->
         <div class="content" >
           <div class="column" v-for="user in users" :key="user.uid">
@@ -26,11 +26,6 @@
 import columns from '@/components/Columns'
 
 export default {
-  // data(){
-  //   return {
-  //     where: ''
-  //   }
-  // },
   components:{
     columns
   },

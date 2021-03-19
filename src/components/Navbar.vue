@@ -2,7 +2,7 @@
    <!--导航标题 -->
    <div class="top" @click = "yes=false">
      <div class="container">
-       <router-link to="/" class="title">知乎专栏</router-link>
+       <router-link to="/" class="title">简单专栏</router-link>
        <div class="user">
          <div class="unenter" v-if="!loginSignItem">
            <router-link to="/login" class="login">登陆</router-link>
@@ -12,7 +12,7 @@
            <a  href="javascript:void(0);" >你好 {{imUser.cname}} 👇</a>
            <ul v-show="yes" @blur="aaaa()">
              <router-link to="/edit"> 新建文章</router-link>
-             <a :href="'/column/'+ imUser.id">我的专栏</a>
+             <router-link :to="'/column/'+ imUser.id">我的专栏</router-link>
              <router-link to="/profile"> 编辑资料</router-link>
              <a @click= "logout" href="javascript:void(0);">
               退出登陆

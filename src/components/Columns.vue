@@ -30,7 +30,7 @@ export default {
 .cardColumn{
   padding: 16px;
 }
-img{
+.cardColumn img{
   width: 50px;
   height: 50px;
   border-radius: 50%;

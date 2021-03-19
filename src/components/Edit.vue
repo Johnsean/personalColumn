@@ -1,35 +1,40 @@
 <template>
-  <div>
+  <div class="input-card w-720">
     <h2>{{head}}文章</h2>
-    <input class="upload" type="file" @change="uploadImg" accept="image/*">
-    <div><img class="photo" :src="img"></div>
-    <div>
-      文章标题：<input  v-model="title" type="text" placeholder="请输入文章标题" required>
-    </div>
-    <div>
-      文章详情：<textarea v-model="context" name="" id="" cols="30" rows="10" placeholder="请输入文章详情"></textarea>
-    </div>
-    <div>
-      <button @click="postArticle">
-        {{post}}文章
-      </button>
+    <uploadfile :img="img" @imgChange="imgChange"></uploadfile>
+    <div class="anLabel">
+      <label>文章标题：</label>
+      <div class="span-father">
+        <input v-model="title" type="text" placeholder="请输入文章标题" @blur="title===undefined?title='':1">
+        <span class="warn" :class="{hidden:title===undefined||title!==''}">文章标题不能为空</span>
       </div>
-
+    </div>
+    <div class="anLabel">
+      <label>文章详情：</label>
+      <div class="span-father">
+        <textarea v-model="context" @blur="context===undefined?context='':1"
+         cols="30" rows="10" placeholder="请输入文章详情"></textarea>
+        <span class="warn" :class="{hidden:context===undefined||context!==''}">文章详情不能为空</span>
+      </div>
+    </div>
+    <button class="bbtn w-90" @click="postArticle">{{post}}文章</button>
   </div>
 </template>
 
 <script>
+import uploadfile from '@/components/Uploadfile'
 export default {
+  components:{uploadfile},
   data(){
     return {
       //初始值
       head:"新建",
-      img: "点击上传头图",
-      title: "",
-      context:"",
-      post:"发表",
+      img: "",
+      title: undefined,
+      context:undefined,
+      post:"发表"
     }
-},
+  },
   computed:{
     article(){ // 返回vuex getters 定义的该id的 用户的数据
       if(this.$route.query.id){
@@ -51,25 +56,14 @@ export default {
     }
   },
   methods:{
-    uploadImg(e){   //上传,显示要上传图片 的操作
-      if(e.target.files){
-        let file = e.target.files[0]
-        if(!/image\/\w+/.test(file.type)){
-          alert("请传入图片")
-          return false;  //如果满足if 后面就不执行了
-        }
-        if(file.size >1024*1024){
-          alert("这个文件大于1M！请重新选择！")
-          return false;
-        }
-        let reader = new FileReader();
-        reader.readAsDataURL(file);  //// img 转Base64 传入url
-        reader.onload = (e)=>{  //加载成功：
-          this.img = e.target.result;
-        }
-      }
+    imgChange(data){
+      this.img = data
     },
     postArticle(){  // 点击提交的操作：
+      if(!this.title||!this.context){
+        alert("提交失败，不要提交空内容")
+        return false
+      }
       if(this.$route.query.id){
         //更新文章代码  artocle= xxxx
         let newArticle = JSON.parse(JSON.stringify(this.article))
@@ -98,12 +92,5 @@ export default {
 </script>
 
 <style lang="">
-.photo{
-  width: 500px;
-  height: 200px;
-  background: rgb(218, 218, 218);
-}
-.upload{
-    opacity: 0.8;
-}
+
 </style>

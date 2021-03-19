@@ -7,8 +7,8 @@
       <span class="gray">{{article.title||""}}</span>
     </div>
     <div class="page" v-if="article">
-      <img :src="article.artImgSrc" alt="头图">
-      <h4>标题: {{article.title||""}} </h4>
+      <img v-if="article.artImgSrc" :src="article.artImgSrc" alt="头图">
+      <h4>{{article.title||""}} </h4>
       <div class="author">
         <div class="left">
           <img :src="user.psrc" alt="头像">
