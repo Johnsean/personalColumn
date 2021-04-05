@@ -21,10 +21,18 @@
           发表于： {{article.stamp}}
         </span>
       </div>
-      <p>{{article.context}}</p>
+      <pre>{{article.context}}</pre>
       <div class="post-btn" v-if="user.isOwn">
         <router-link :to="'/edit?id='+ article.id">编辑</router-link>
-        <button type="button" @click="delArt">删除</button>
+        <button type="button" @click="delMeg">删除</button>
+      </div>
+      <div class="shadowAll"  v-if = "isVisible">
+        <div class="modalMeg">
+          <div>
+            <h4>是否确认删除</h4>
+          </div>
+          <div class="btnContainer"><button class="bbtn" @click="delArt">确定</button><button class="bbtn" @click="delMeg">取消</button></div>
+        </div>
       </div>
     </div>
 
@@ -36,6 +44,7 @@ export default {
  data(){
     return {
       articleId:'', //默认展示的文章Id
+      isVisible: false
     }
   },
   computed: {
@@ -51,6 +60,9 @@ export default {
     this.$store.dispatch('getUsers')
   },
   methods:{
+    delMeg(){
+      this.isVisible = !this.isVisible
+    },
     delArt(){
       this.$store.commit("delArticle",this.$route.params.id)
       alert("删除成功，2秒后自动跳转", setTimeout(() => {
@@ -90,6 +102,7 @@ export default {
   text-align: left;
   padding-bottom: 16px;
   margin-bottom: 48px;
+  position: relative;
 }
 .page>img{
   margin: 24px 0;
@@ -178,5 +191,39 @@ div.author > span.right{
   color: #fff;
   background-color: #c82333;
   border-color: #bd2130;
+}
+
+/* modalMeg */
+.shadowAll {
+  position: absolute;
+  left: -20%;
+  top: -100%;
+  width: 140%;
+  height: 1000%;
+  z-index: 99;
+  background: rgba(255,255,255,.8);
+}
+.modalMeg {
+  position: fixed;
+  left:15%;
+  top: 40%;
+  width: 70vw;
+  height: 20vh;
+  display: flex;
+  border:1px solid skyblue;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 5px;
+  background: rgba(130, 238, 220,.7);
+  border-radius: 4px;
+}
+.modalMeg h4 {
+  padding: 8px;
+  font-weight: 550;
+}
+.modalMeg .btnContainer{
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

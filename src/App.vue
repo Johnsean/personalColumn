@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <navbar></navbar>
-    <router-view></router-view>
+    <router-view :key="$route.fullPath"></router-view>
   </div>
 </template>
 
@@ -34,9 +34,6 @@ a{
   color: #0d6efd;
 }
 
-body{
-  /* height: 1500px; */
-}
 h2{
   /* profile & edit */
   margin: 0 0 8px;
@@ -73,6 +70,12 @@ h4{
 .warn{
   color:red;
   display: inline-block;
+}
+/* 清除浮动 */
+.clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
 }
 
 
@@ -173,5 +176,168 @@ h4{
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+}
+
+@media screen and (min-width: 360px) and (max-width: 680px) {
+    /* html {
+        360px尺寸作为16px基准
+        font-size: calc(100% + 2 * (100vw - 375px) / 39);
+        font-size: calc(16px + 2 * (100vw - 375px) / 39);
+    } */
+    /* top */
+     .top{
+      margin-bottom: 15px!important;
+    }
+
+    /* footer */
+    .footer .content {
+      align-items: center;
+    }
+    .footer .content .column {
+      padding: 0;
+      width: 95%;
+      width: 45vw;
+    }
+    .footer .content .column .cardColumn {
+      padding-top: 0;
+    }
+    /* column */
+    div.cardColumn .text{
+      height: auto;
+    }
+    div.cardColumn>div{
+      margin: 8px 0;
+    }
+
+    /* presonalColumn */
+    div.percolmain {
+      width: 100%;
+    }
+    div.head {
+      display: block;
+      width: 95%;
+      position: relative;
+      padding-bottom: 0;
+      margin: 0 auto;
+    }
+    div.head .right{
+      padding-right: 0;
+      text-indent: 1em;
+    }
+
+    div.head img {
+      float: left;
+      margin-left: 10px;
+      height: 75px;
+      width: 75px;
+      object-fit: cover;
+    }
+
+    /* article  */
+    div.art-container {
+      margin-bottom: 0;
+      padding: 10px;
+    }
+    div .article {
+      margin-bottom: 0;
+    }
+    div.article{
+      padding-bottom: 4px;
+    }
+    .article > .middle {
+      flex-direction: column;
+      margin: 0;
+    }
+    .article > .middle>div {
+      padding: 8px;
+    }
+    .article > .middle img {
+      width: 100%;
+      object-fit: cover;
+    }
+    .article > .middle p {
+      text-indent: 2em;
+      margin-bottom: 8px;
+    }
+    .article > .middle > *{
+      width: 100%;
+    }
+    div.article>h4 {
+    text-align: center;
+    /* 单行溢出 */
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    }
+
+    /* .postCard */
+    div.navurl{
+      margin-bottom: 8px;
+    }
+    div.navurl a{
+      padding-right: 0;
+    }
+
+    .page {
+      /* overflow: hidden; */
+    }
+    div.page > img{
+      margin: 6px 0;
+      object-fit: contain;
+      width: 95vw;
+      /* max-height: fit-content; */
+    }
+    div.page > h4{
+      margin: 12px 0;
+    }
+    div.postCard {
+      width: 95%;
+      margin: 0 auto;
+    }
+
+    div.page> div.author {
+      padding-top: 8px;
+      padding-bottom: 0;
+      margin-bottom: 12px;
+      flex-direction: column;
+    }
+    div.page> div.author img{
+      object-fit: cover;
+    }
+
+   div.author > span.right.gray {
+     text-align: center;
+     font-size: 12px;
+     line-height: 20px;
+    }
+
+    /* edit */
+    .input-card {
+      padding-top: 0;
+    }
+    .input-card .anLabel{
+      margin-bottom: 0;
+    }
+    .input-card .anLabel textarea{
+      height: 100px;
+    }
+    .input-card > button {
+      margin: 0 auto;
+      width: 90vw!important;
+    }
+
+    /* profile */
+    div.input-card .perinfo{
+      margin: 0 0 12px;
+    }
+    div.input-card textarea{
+      height: 80px;
+    }
+
+    /* login & register */
+    .input-card>h4 {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
 }
 </style>

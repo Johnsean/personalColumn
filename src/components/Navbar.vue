@@ -1,6 +1,6 @@
 <template>
    <!--导航标题 -->
-   <div class="top" @click = "yes=false">
+   <div class="top">
      <div class="container">
        <router-link to="/" class="title">简单专栏</router-link>
        <div class="user">
@@ -8,11 +8,11 @@
            <router-link to="/login" class="login">登陆</router-link>
            <router-link to="/register" class="register">注册</router-link>
          </div>
-         <div class="enter" v-else @click.stop = "yes=!yes">
-           <a  href="javascript:void(0);" >你好 {{imUser.cname}} 👇</a>
-           <ul v-show="yes" @blur="aaaa()">
+         <div ref="ulDom" class="enter" @click.stop = "yes=!yes" v-else>
+           <a>你好 {{imUser.cname}} 👇</a>
+           <ul v-show="yes" >
              <router-link to="/edit"> 新建文章</router-link>
-             <router-link :to="'/column/'+ imUser.id">我的专栏</router-link>
+             <router-link :to="`/column/${imUser.id}`">我的专栏</router-link>
              <router-link to="/profile"> 编辑资料</router-link>
              <a @click= "logout" href="javascript:void(0);">
               退出登陆
@@ -32,6 +32,12 @@ export default {
       loginSignItem: loginSignItem  //值为 全局静态参数  ：初始化的 检测是否登陆了
     }
   },
+  mounted(){
+    document.addEventListener('click',this.isOutSide)
+  },
+  unmounted() {
+    document.removeEventListener('click',this.isOutSide)
+  },
   computed: {
     isLogin(){
       return this.$store.state.isLogin;
@@ -49,6 +55,13 @@ export default {
     }
   },
   methods:{
+    isOutSide(e){
+      if(this.$refs.ulDom){
+        if(!this.$refs.ulDom.contains(e.target) && this.yes) {
+          this.yes = false
+        }
+      }
+    },
     logout(){  //登出代码
     // 登出时 update 本地userlis数据
       let oldArray = setLocal.get("login")//取出操作前的本地注册users信息
@@ -107,7 +120,7 @@ export default {
   font-size: 16px;
   padding: 6px 12px;
   border: 1px solid #fff;
-  border-radius: 10%;
+  border-radius: 5px;
 }
 
 /* user>enter */
@@ -115,6 +128,7 @@ export default {
   position: relative;
 }
 .container .user ul{
+  z-index: 999;
   position: absolute;
   padding: 8px 0;
   top:36px;
@@ -124,7 +138,6 @@ export default {
   border:1px solid #eee;
   border-radius: .25rem;
   box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
-
 }
 .container .user ul a{
   display: block;
@@ -135,9 +148,6 @@ export default {
   border:0;
   border-radius: 0;
 }
-
-
-
 .container .user ul a:hover{
   background-color: #f8f9fa;
 }
@@ -145,6 +155,4 @@ export default {
   color: #fff;
   background-color: #0d6efd;
 }
-
-
 </style>

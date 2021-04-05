@@ -8,13 +8,13 @@
         <a href="javascript:void(0);" :class="{active:!sign}"> 更新专栏信息</a>
       </li>
     </ul>
-    <h2>编辑个人资料</h2>
+    <h2>编辑:</h2>
     <uploadfile class="img-user" :img="src" @imgChange="imgChange"></uploadfile>
-    <div class="span-father">
+    <div class="span-father spaClear">
       <input v-model="name">
       <span class="warn" :class="{hidden:name!==''}">不能为空</span>
     </div>
-    <div class="span-father">
+    <div class="span-father spaClear">
       <textarea v-model="intro" rows="10"></textarea>
       <span class="warn" :class="{hidden:intro!==''}">不能为空</span>
     </div>
@@ -105,5 +105,16 @@ input,textarea{
 .input-card span.warn {
  bottom: 11px;
 }
-
+@media screen and (min-width: 360px) and (max-width: 680px) {
+ div.img-user  img{
+    width: 150px;
+    object-fit: cover;
+  }
+  .spaClear {
+    padding-bottom: 1px!important;
+  }
+  .spaClear > span {
+    bottom: -1px!important;
+  }
+}
 </style>

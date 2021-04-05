@@ -65,6 +65,22 @@ img.photo{
 }
 h3.notice{
   position: relative;
-  top:90px;
+  top:45%;
+}
+
+@media screen and (min-width: 360px) and (max-width: 680px) {
+  div.imgUpload{
+    margin: 0 0 12px;
+    height: 150px;
+  }
+  input.upload{
+    top:0;
+  }
+  div.img-card{
+    height: 150px;
+  }
+  div>img.photo{
+    height: 100%;
+  }
 }
 </style>
