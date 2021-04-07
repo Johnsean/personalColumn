@@ -33,7 +33,7 @@ a{
   text-decoration: none;
   color: #0d6efd;
 }
-
+html{ font-size: 16px;}
 h2{
   /* profile & edit */
   margin: 0 0 8px;
@@ -182,16 +182,32 @@ h4{
 }
 /* pre */
 pre{
+  font-size: 16px;
   white-space: pre-wrap;
   word-wrap: break-word;
   /* word-break: break-all; */
 }
-@media screen and (min-width: 360px) and (max-width: 680px) {
+@media  screen and (max-width: 320px) {
+  .container {
+    margin: 0 10px!important;
+  }
+   .footer .content .column {
+    padding: 0;
+    width: 95%;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 360px) {
+  .container{
+    margin: 0 10px!important;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 680px) {
     /* html {
-        360px尺寸作为16px基准
         font-size: calc(100% + 2 * (100vw - 375px) / 39);
         font-size: calc(16px + 2 * (100vw - 375px) / 39);
     } */
+    /* html { font-size: calc(100vw / 36) } /*  360px尺寸10px 作为基准 */
+
     /* top */
      .top{
       margin-bottom: 15px!important;
@@ -313,7 +329,9 @@ pre{
     div.page> div.author img{
       object-fit: cover;
     }
-
+   div.author .intro> span.gray {
+     font-size: 14px;
+   }
    div.author > span.right.gray {
      text-align: center;
      font-size: 12px;
