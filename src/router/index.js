@@ -7,10 +7,11 @@ import edit from '@/components/Edit'
 import personColumn from '@/components/personColumn'
 import post from '@/components/Post'
 import profile from '@/components/Profile'
+import store from '../store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode:'history',
   routes: [
     {
@@ -21,16 +22,25 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
+      meta: {
+        redirectAlreadyLogin: true
+      },
       component: login
     },
     {
       path: '/register',
       name: 'register',
+      meta: {
+        redirectAlreadyLogin: true
+      },
       component: register
     },
     {
       path: '/edit',
       name: 'edit',
+      meta: {
+        requiredLogin: true
+      },
       component: edit
     },{
       path: '/column/:id',
@@ -43,7 +53,28 @@ export default new Router({
     }, {
       path: '/profile',
       name: 'profile',
+      meta: {
+        requiredLogin: true
+      },
       component:  profile
     }
   ]
 })
+router.beforeEach((to, from, next) => {
+  const {isLogin} = store.state
+  const {requiredLogin,redirectAlreadyLogin} = to.meta
+  if (!isLogin) {
+    if (requiredLogin) {
+      next('/login')
+    } else {
+      next()
+    }
+  } else {
+    if (redirectAlreadyLogin) {
+      next('/')
+    } else {
+      next()
+    }
+  }
+})
+export default router
