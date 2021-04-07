@@ -7,6 +7,7 @@ Vue.use(Vuex);
 var store = new Vuex.Store({
   state: {
     users:'',
+    isloaded: false, //是否拉取过了
     imUser: loginSignItem, ///默认值为 表中 当前'我'的信息
     isLogin: !!loginSignItem //默认值为 表中是否登记了 登陆
   },
@@ -18,7 +19,7 @@ var store = new Vuex.Store({
       }else{  //当不是自己的专栏才执行
         if (state.users) { //当users有数据的时候才执行
           return state.users.filter(user => {
-            if (user.id === id) return true;
+            if (user.id-0 === id-0) return true;
             return false;
           })[0]
         }
@@ -27,12 +28,15 @@ var store = new Vuex.Store({
     //筛选单个文章内容&作者信息
     getArticle: (state)=>(paperId)=>{
       let otherPaper = false  //是否是别人的文章
+      if (!state.isLogin){ //没登陆了 那一定不是自己的文章
+        otherPaper = true
+      }
 
       if (state.isLogin && !otherPaper) { // 验证是否是用户自己的文章 id都转换为数字型比较
         if (state.imUser.articles) {
           let imPaper,imArticle = {}
           imPaper = JSON.parse(JSON.stringify(state.imUser)) //防止了改state.imUser值
-          imArticle = state.imUser.articles.find(article => {
+          imArticle = imPaper.articles.find(article => {
             if (!article.id) { //没有文章
               return false
             }
@@ -50,21 +54,24 @@ var store = new Vuex.Store({
       }
 
       if (state.users && otherPaper) {
-        let theArticle = {} //筛选出来的该文章信息 article:{...}
         let thePaper = {}; //组合文章&作者信息 {info..,articles:{...}}
-        thePaper = state.users.find(user => {
-          if (!user.articles) { //articles不存在
+
+        state.users.filter(user => {
+          if (user.articles) {
+            user.articles.filter(p => {
+              if(p.id){
+                if(p.id -0 === paperId -0){
+                  thePaper = JSON.parse(JSON.stringify(user))
+                  thePaper.articles = p
+                  return thePaper
+                }
+                return false
+              }
+            })
             return false
           }
-          theArticle = user.articles.find(article => { //找含有/post/id的用户
-            if (!article.id) { //没有文章
-              return false
-            }
-            return article.id-0 === paperId-0 //文章筛选出来了
-          })
-          return user.id
+          return false
         })
-        thePaper.articles = theArticle //组装thePaper
         return thePaper
       }
     }
@@ -81,6 +88,7 @@ var store = new Vuex.Store({
     },
     usersMutation(state, payload) { //异步拉取用户组的数据
       state.users = payload.data.users
+      state.isloaded = true
     },
     updateInfo(state, payload){ //登陆退出时保存
       Object.assign(state.imUser, payload)
@@ -125,9 +133,13 @@ var store = new Vuex.Store({
     }
   },
   actions:{
-    getUsers({commit}) {  //异步拉取用户组 信息
-      axios.get("https://www.fastmock.site/mock/0431f3372ea8aecd3a1a98f3d90625ba/users/api/getusers")
-      .then((data) => {commit('usersMutation',data)})
+    getUsers({state,commit}) {  //异步拉取用户组 信息
+      if(!state.isloaded) { //优化不重复拉取
+        axios.get("https://www.fastmock.site/mock/0431f3372ea8aecd3a1a98f3d90625ba/users/api/getusers")
+          .then((data) => {
+            commit('usersMutation', data)
+        })
+      }
     },
     updateLogin({commit},arg){  //异步验证登陆
       axios.post("https://www.fastmock.site/mock/0431f3372ea8aecd3a1a98f3d90625ba/users/api/login", arg).then((res) => {

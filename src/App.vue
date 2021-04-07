@@ -177,7 +177,15 @@ h4{
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
-
+.cardColumn img {
+  object-fit: cover;
+}
+/* pre */
+pre{
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  /* word-break: break-all; */
+}
 @media screen and (min-width: 360px) and (max-width: 680px) {
     /* html {
         360px尺寸作为16px基准
@@ -195,8 +203,9 @@ h4{
     }
     .footer .content .column {
       padding: 0;
-      width: 95%;
+      /* width: 95%; */
       width: 45vw;
+      margin-bottom: 12px;
     }
     .footer .content .column .cardColumn {
       padding-top: 0;

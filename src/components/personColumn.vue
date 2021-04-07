@@ -23,6 +23,7 @@
           <span class="gray">{{article.stamp}}</span>
         </div>
       </div>
+       <loader-more :pageSize="pageSize" :total="total" @isclick="loaded"></loader-more>
     </div>
     <div v-else>
       <p class="lblue gray">没有文章</p>
@@ -31,7 +32,17 @@
 </template>
 
 <script>
+import LoaderMore from '@/components/LoaderMore'
 export default {
+  data(){
+    return {
+      userId:'',
+      pageSize:4, //每次加载6个
+      total:0,
+      currentPage:1
+    }
+  },
+  components:{ LoaderMore },
   // 通过id 拿到该用户的所有信息
   // ①专栏信息 ②文章： 循环articles把 article 弄出来
   computed: {
@@ -43,14 +54,31 @@ export default {
     },
     articles(){  //返回专栏文章合集
       if(this.user && this.user.articles){
-        let reArr = JSON.parse(JSON.stringify(this.user.articles))
-        return reArr.reverse();  //数据倒叙 显示
+        let reArr = JSON.parse(JSON.stringify(this.user.articles)).reverse() //数据倒叙 显示
+        let arr = []
+        if(reArr && reArr.length){
+          this.total = reArr.length
+          let i = 1
+          arr = reArr.filter((c)=>{ //分页
+            if( (i <= this.pageSize*this.currentPage ) && !!c){
+              i++
+              return c
+            }
+          })
+          return arr;
+        }
+        return arr;
       }
     }
   },
   created(){  // created生命周期，在实例已经创建完成，页面还没渲染时调用 获取路由中 id值
     this.userId = this.$route.params.id
     this.$store.dispatch('getUsers')
+  },
+  methods:{
+    loaded (count) {
+      this.currentPage = count
+    }
   }
 }
 </script>

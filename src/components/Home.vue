@@ -18,20 +18,41 @@
             </columns>
           </div>
         </div>
+        <loader-more :pageSize="pageSize" :total="total" @isclick="loaded"></loader-more>
       </div>
    </div>
 </template>
 
 <script>
 import columns from '@/components/Columns'
+import LoaderMore from '@/components/LoaderMore'
 
 export default {
+  data(){
+    return {
+      pageSize:4, //每次加载6个
+      total:0,
+      currentPage:1
+    }
+  },
   components:{
-    columns
+    columns,LoaderMore
   },
   computed:{
     users(){ //同步更新
-      return this.$store.state.users
+      if(this.$store.state.users && this.$store.state.users.length){
+        this.total = this.$store.state.users.length
+        let arr = [],curUsers = this.$store.state.users
+        let i = 1
+        arr = curUsers.filter((c)=>{ //分页
+            if( (i <= this.pageSize*this.currentPage ) && !!c){
+              i++
+            return c
+          }
+        })
+        return arr
+        // return this.$store.state.users
+      }
     },
     isLogin(){  //标记登陆状态
       return this.$store.state.isLogin
@@ -41,6 +62,9 @@ export default {
     this.$store.dispatch('getUsers')
   },
   methods:{
+    loaded(count){
+      this.currentPage = count
+    },
     isEdit(){
       if(this.isLogin){ //根据Login 值判断跳转哪个页面
         this.$router.push("/edit")
