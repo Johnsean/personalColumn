@@ -188,6 +188,17 @@ pre{
   /* word-break: break-all; */
 }
 @media  screen and (max-width: 320px) {
+  div.head,.percolmain,.middle{
+    width: 95vw!important;
+    flex-direction: column;
+  }
+  .article{
+    width: 95%;
+    margin: 0 auto;
+  }
+ .author{
+   flex-direction: column;
+ }
   .container {
     margin: 0 10px!important;
   }
@@ -366,5 +377,20 @@ pre{
       margin-top: 0;
       margin-bottom: 12px;
     }
+}
+
+@media screen and (min-width: 1316px) {
+  .percolmain{
+    width: 85vw!important;
+  }
+  .middle>div {
+    width: auto!important;
+  }
+  .middle>p{
+   flex-grow:1!important;
+  }
+  /* .column{
+    width: 23%!important;
+  } */
 }
 </style>
