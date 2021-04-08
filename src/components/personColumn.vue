@@ -159,6 +159,7 @@ div.right{
   -webkit-line-clamp: 5;
   line-height: 24px;
   box-sizing: border-box;
+  height: 120px;
 }
 div.article > span.gray{
   text-align: left;

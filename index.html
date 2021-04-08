@@ -20,10 +20,10 @@
       // a.post b.与表中值对比 只要是登陆成功 就拿出来
       //判断是否登陆成功状态。 是的话就：
       var setLocal= {
-        save(key,value){
+        save: function(key,value){
           localStorage.setItem(key,JSON.stringify(value))
         },
-        get(key){
+        get: function(key){
           return JSON.parse(localStorage.getItem(key))
         }
       }
