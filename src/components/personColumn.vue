@@ -159,7 +159,7 @@ div.right{
   -webkit-line-clamp: 5;
   line-height: 24px;
   box-sizing: border-box;
-  height: 120px;
+  max-height: 120px; /**兼容ie ie不是webkit 不支持多行省略css */
 }
 div.article > span.gray{
   text-align: left;
