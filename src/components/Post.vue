@@ -11,7 +11,7 @@
       <h4>{{article.title||""}} </h4>
       <div class="author">
         <div class="left">
-          <img :src="user.psrc||'http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f3e3a21c305b1070f455204.jpg?x-oss-process=image/resize,m_pad,h_100,w_100'" alt="头像">
+          <img :src="user.psrc||'https://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f3e3a21c305b1070f455204.jpg?x-oss-process=image/resize,m_pad,h_100,w_100'" alt="头像">
           <div class="intro">
             <h4> {{user.pname ||"无名氏"}} </h4>
             <span class="gray"> {{user.pintro||"无简介"}} </span>

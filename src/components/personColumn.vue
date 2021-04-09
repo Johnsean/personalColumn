@@ -2,7 +2,7 @@
 <!-- 某个人的专栏展示界面 -->
   <div class="percolmain" v-if="user">
     <div class="head clearfix">
-      <img :src="user.csrc||'http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f3e3a21c305b1070f455204.jpg?x-oss-process=image/resize,m_pad,h_100,w_100'" alt="头像">
+      <img :src="user.csrc||'https://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f3e3a21c305b1070f455204.jpg?x-oss-process=image/resize,m_pad,h_100,w_100'" alt="头像">
       <div class="right">
         <h4>{{user.cname||"用户"+user.username}}的专栏</h4>
         <p class="gray">{{user.cintro||"这个人没有简介"}}</p>

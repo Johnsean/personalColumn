@@ -51,8 +51,8 @@ export default {
     register(){
       if(this.vpwd === this.password && this.password && this.username){
         let body = {"username":this.username,"password":this.password,
-          csrc:"http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f3e3a21c305b1070f455204.jpg?x-oss-process=image/resize,m_pad,h_100,w_100",
-          psrc:"http://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f3e3a21c305b1070f455204.jpg?x-oss-process=image/resize,m_pad,h_100,w_100",
+          csrc:"https://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f3e3a21c305b1070f455204.jpg?x-oss-process=image/resize,m_pad,h_100,w_100",
+          psrc:"https://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f3e3a21c305b1070f455204.jpg?x-oss-process=image/resize,m_pad,h_100,w_100",
           cname:this.username,pname:"用户"+this.username,
           cintro:"无简介",pintro:"该用户什么也没说"
         }
